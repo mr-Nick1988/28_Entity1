@@ -7,7 +7,7 @@ import java.util.*;
 public class EntityCollectionC implements EntityCollection {
     private final LinkedList<Entity> entities = new LinkedList<>();
 
-    //O(n)
+     //O(n)
     @Override
     public void add(Entity entity) {
         int index = Collections.binarySearch(entities, entity);
