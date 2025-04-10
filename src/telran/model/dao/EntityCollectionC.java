@@ -1,25 +1,26 @@
 package telran.model.dao;
 
+import com.sun.source.tree.Tree;
 import telran.model.Entity;
 
 import java.util.*;
 
 public class EntityCollectionC implements EntityCollection {
-    private final LinkedList<Entity> entities = new LinkedList<>();
+    private final TreeSet<Entity> entities = new TreeSet<>();
 
-     //O(n)
+    //O(log n)
     @Override
     public void add(Entity entity) {
-        int index = Collections.binarySearch(entities, entity);
-        if (index < 0) {
-            index = -index - 1;
-        }
-        entities.add(index, entity);
+        entities.add(entity);
     }
 
     //O(1)
     @Override
     public Entity removeMaxValue() {
-        return entities.isEmpty() ? null : entities.removeFirst();
+        if (entities.isEmpty()) {
+            return null;
+        }
+        Entity maxEntity = entities.pollLast();
+        return maxEntity;
     }
 }

@@ -2,22 +2,20 @@ package telran.model.dao;
 
 import telran.model.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class EntityCollectionA implements EntityCollection {
-    private final List<Entity> entities = new ArrayList<>();
+    private final HashSet<Entity> entities = new HashSet<>();
     private Entity maxEntity = null;
 
 
     //O(1)
     @Override
     public void add(Entity entity) {
-        entities.add(entity);
-        if (maxEntity == null || entity.compareTo(maxEntity) > 0) {
+        if (entities.add(entity) && (maxEntity == null || entity.compareTo(maxEntity) > 0)) {
             maxEntity = entity;
         }
+
     }
 
     //O(n)
